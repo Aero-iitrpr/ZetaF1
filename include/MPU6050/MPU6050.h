@@ -1,7 +1,7 @@
 #ifndef MPU6050_H
 #define MPU6050_H
 #include <Arduino.h>
-#include "../modules/Zeta_Low_Pass/Zeta_Low_Pass.h"
+#include "../Zeta_Low_Pass/Zeta_Low_Pass.h"
 
 class MPU6050Sensor
 {

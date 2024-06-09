@@ -31,3 +31,4 @@ void ZetaLowPass::updateAlpha() {
     float dt = 1.0 / sampleRate;
     alpha = dt / (rc + dt);
 }
+
