@@ -14,6 +14,7 @@ void MPU6050Sensor::initialize()
     Wire.write(0x6B);
     Wire.write(0x00);
     Wire.endTransmission();
+
 }
 
 bool MPU6050Sensor::check()

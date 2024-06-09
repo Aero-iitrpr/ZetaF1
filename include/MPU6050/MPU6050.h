@@ -34,3 +34,4 @@ private:
 extern MPU6050Sensor mpu6050Sensor;
 
 #endif // MPU6050_H
+
