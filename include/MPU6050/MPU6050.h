@@ -1,6 +1,7 @@
 #ifndef MPU6050_H
 #define MPU6050_H
 #include <Arduino.h>
+#include <param.h>
 
 class MPU6050Sensor
 {
@@ -18,7 +19,6 @@ public:
     float getGyroZ();
 
 private:
-    int MPU_Address = 0x68;
     int16_t UAccX, UAccY, UAccZ;
     int16_t UGyro_Roll, UGyro_Pitch, UGyro_Yaw;
     int16_t MPUTemperature;
