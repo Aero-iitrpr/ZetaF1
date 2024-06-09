@@ -26,6 +26,8 @@ public:
     float AccX, AccY, AccZ;
     float AngleRoll, AnglePitch;
     float RateRoll, RatePitch, RateYaw;
+    float AccX_Low_Pass, AccY_Low_Pass, AccZ_Low_Pass;
+    float RateRoll_Low_Pass, RatePitch_Low_Pass, RateYaw_Low_Pass;
     float Altitude;
 
 private:

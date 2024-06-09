@@ -38,12 +38,12 @@ void Drone::GetMPU6050Data(void)
 }
 void Drone::ApplyLowPass(void)
 {
-    AccX = accelXFilter.process(AccX);
-    AccY = accelYFilter.process(AccY);
-    AccZ = accelZFilter.process(AccZ);
-    RateRoll = gyroXFilter.process(RateRoll);
-    RatePitch = gyroYFilter.process(RatePitch);
-    RateYaw = gyroZFilter.process(RateYaw);
+    AccX_Low_Pass = accelXFilter.process(AccX);
+    AccY_Low_Pass = accelYFilter.process(AccY);
+    AccZ_Low_Pass = accelZFilter.process(AccZ);
+    RateRoll_Low_Pass = gyroXFilter.process(RateRoll);
+    RatePitch_Low_Pass = gyroYFilter.process(RatePitch);
+    RateYaw_Low_Pass = gyroZFilter.process(RateYaw);
 }
 
 void Drone::Postprocessing()
