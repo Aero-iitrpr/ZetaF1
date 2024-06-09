@@ -5,6 +5,8 @@ void Drone::Initialize_Drone()
 {
     // this function does the initial setup required for the drone
     mpu6050.initialize();
+    //adding initial PPM support later use macros to switch dynamically
+    zetaRcin.initialize();
 }
 
 void Drone::Caliberate_Drone()
@@ -67,3 +69,16 @@ bool Drone::MidAirDrone()
     // write algo for checking if the drone is mid air
     return false;
 }
+
+void Drone::updateRCIN()
+{
+    //updating the store
+    zetaRcin.update();
+    Receiver_Values=zetaRcin.Receiver_Values_Store();
+}
+
+std::vector<float> Drone::Return_Receiver_Store()
+{
+    return Receiver_Values;
+}
+

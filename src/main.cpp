@@ -25,4 +25,9 @@ void loop()
   Serial.println(drone.getDroneGyroY());
   Serial.print("Gyro Z: ");
   Serial.println(drone.getDroneGyroZ());
+  //debug mode
+  for(auto channel:drone.Receiver_Values)
+  {
+    Serial.println(channel);
+  }
 }
