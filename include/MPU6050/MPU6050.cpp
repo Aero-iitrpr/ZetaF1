@@ -9,6 +9,17 @@ void MPU6050Sensor::initialize()
     Wire.write(0x6B);
     Wire.write(0x00);
     Wire.endTransmission();
+
+    // Initialize low-pass filters with appropriate cutoff frequency and sample rate
+    float cutoffFrequency = 5.0; // change this to the actual cutoff frequency
+    float sampleRate = 100.0; // change this to the actual sample rate
+
+    accelXFilter = ZetaLowPass(cutoffFrequency, sampleRate);
+    accelYFilter = ZetaLowPass(cutoffFrequency, sampleRate);
+    accelZFilter = ZetaLowPass(cutoffFrequency, sampleRate);
+    gyroXFilter = ZetaLowPass(cutoffFrequency, sampleRate);
+    gyroYFilter = ZetaLowPass(cutoffFrequency, sampleRate);
+    gyroZFilter = ZetaLowPass(cutoffFrequency, sampleRate);
 }
 
 bool MPU6050Sensor::check()
@@ -58,6 +69,14 @@ void MPU6050Sensor::MPU6050_Output()
     RateRoll = (float)UGyro_Roll / 65.5;
     RatePitch = (float)UGyro_Pitch / 65.5;
     RateYaw = (float)UGyro_Yaw / 65.5;
+
+    // Apply low-pass filters to the accelerometer and gyroscope data
+    AccX = accelXFilter.process(AccX);
+    AccY = accelYFilter.process(AccY);
+    AccZ = accelZFilter.process(AccZ);
+    RateRoll = gyroXFilter.process(RateRoll);
+    RatePitch = gyroYFilter.process(RatePitch);
+    RateYaw = gyroZFilter.process(RateYaw);
 }
 
 void MPU6050Sensor::Gyro_Caliberate(void)

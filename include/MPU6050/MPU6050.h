@@ -1,6 +1,7 @@
 #ifndef MPU6050_H
 #define MPU6050_H
 #include <Arduino.h>
+#include "../modules/Zeta_Low_Pass/Zeta_Low_Pass.h"
 
 class MPU6050Sensor
 {
@@ -29,6 +30,14 @@ private:
     float UGyro_Roll_Cal, UGyro_Pitch_Cal, UGyro_Yaw_Cal;
     int Accel_Caliberation_Num;
     float Accel_Roll_Cal, Accel_Pitch_Cal,Accel_Yaw_Cal;
+
+    // Low-pass filters for accelerometer and gyroscope data
+    ZetaLowPass accelXFilter;
+    ZetaLowPass accelYFilter;
+    ZetaLowPass accelZFilter;
+    ZetaLowPass gyroXFilter;
+    ZetaLowPass gyroYFilter;
+    ZetaLowPass gyroZFilter;
 };
 
 extern MPU6050Sensor mpu6050Sensor;
