@@ -1,11 +1,16 @@
-#include "mpu6050.h"
+//This is in experiment phase
+//Experiment Priority normal
+
 #include <Wire.h>
 #include <Arduino.h>
+#include <MPU6050/MPU6050.h>
+
+
 
 void MPU6050Sensor::initialize()
 {
     // initiating the MPU6050 I2C communication
-    Wire.beginTransmission(MPU_Address);
+    Wire.beginTransmission(MPU6050_ADDRESS);
     Wire.write(0x6B);
     Wire.write(0x00);
     Wire.endTransmission();
@@ -13,7 +18,7 @@ void MPU6050Sensor::initialize()
 
 bool MPU6050Sensor::check()
 {
-    Wire.beginTransmission(MPU_Address);
+    Wire.beginTransmission(MPU6050_ADDRESS);
     int Gyro_Error = Wire.endTransmission();
     while (Gyro_Error != 0)
     {
@@ -26,29 +31,29 @@ bool MPU6050Sensor::check()
 
 void MPU6050Sensor::MPU6050_Output()
 {
-    Wire.beginTransmission(MPU_Address);
+    Wire.beginTransmission(MPU6050_ADDRESS);
     Wire.write(0x1A);
     Wire.write(0x05);
     Wire.endTransmission();
-    Wire.beginTransmission(MPU_Address);
+    Wire.beginTransmission(MPU6050_ADDRESS);
     Wire.write(0x1C);
     Wire.write(0x10);
     Wire.endTransmission();
-    Wire.beginTransmission(MPU_Address);
+    Wire.beginTransmission(MPU6050_ADDRESS);
     Wire.write(0x3B);
     Wire.endTransmission();
-    Wire.requestFrom(MPU_Address, 6);
+    Wire.requestFrom(MPU6050_ADDRESS, 6);
     UAccX = Wire.read() << 8 | Wire.read();
     UAccY = Wire.read() << 8 | Wire.read();
     UAccZ = Wire.read() << 8 | Wire.read();
-    Wire.beginTransmission(MPU_Address);
+    Wire.beginTransmission(MPU6050_ADDRESS);
     Wire.write(0x1B);
     Wire.write(0x8);
     Wire.endTransmission();
-    Wire.beginTransmission(MPU_Address);
+    Wire.beginTransmission(MPU6050_ADDRESS);
     Wire.write(0x43);
     Wire.endTransmission();
-    Wire.requestFrom(MPU_Address, 6);
+    Wire.requestFrom(MPU6050_ADDRESS, 6);
     UGyro_Roll = Wire.read() << 8 | Wire.read();
     UGyro_Pitch = Wire.read() << 8 | Wire.read();
     UGyro_Yaw = Wire.read() << 8 | Wire.read();
