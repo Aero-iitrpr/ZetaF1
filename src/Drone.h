@@ -11,7 +11,6 @@
 class Drone
 {
 public:
-    bool Caliberated = false;
     void Initialize_Drone();
     void Caliberate_Drone();
     void GetMPU6050Data();
@@ -24,18 +23,19 @@ public:
     float getDroneGyroZ();
     bool MidAirDrone();
     void updateRCIN();
-    std::vector<float>Return_Receiver_Store();
+    std::vector<float> Return_Receiver_Store();
 
     // global variables
     bool MidAirDroneBool;
-    //mpu6050 variables
+    // mpu6050 variables
     float AccX, AccY, AccZ;
     float AngleRoll, AnglePitch;
     float RateRoll, RatePitch, RateYaw;
-    //baro variable
+    // baro variable
     float Altitude;
-    //rcin variables
-    std::vector<float>Receiver_Values;
+    bool Caliberated = false;
+    // rcin variables
+    std::vector<float> Receiver_Values;
 
 private:
     MPU6050Sensor mpu6050;
@@ -44,6 +44,6 @@ private:
 #endif
 };
 
-extern Drone drone;
+// extern Drone drone;
 
 #endif // DRONE_H

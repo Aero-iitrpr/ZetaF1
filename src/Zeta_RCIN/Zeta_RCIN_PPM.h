@@ -20,10 +20,10 @@ public:
 private:
     PulsePositionInput PPM_Receiver;
     int _pin;
-    int Number_Channels;
+    int Number_Channelsw;
     std::vector<float> Receiver_Values;
 };
 
-extern ZetaRCIN_PPM zetaRcinPPM;
+// extern ZetaRCIN_PPM zetaRcinPPM;
 
 #endif // Zeta_RCIN_H

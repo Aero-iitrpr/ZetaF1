@@ -1,15 +1,23 @@
 #include "drone.h"
 #include <Arduino.h>
+#include <MPU6050/MPU6050.h>
+#include <vector>
 
-void Drone::Initialize_Drone()
+#ifdef USE_PPM
+#include <Zeta_RCIN/Zeta_RCIN_PPM.h>
+#endif
+
+
+
+void Drone::Initialize_Drone(void)
 {
     // this function does the initial setup required for the drone
     mpu6050.initialize();
-    //adding initial PPM support later use macros to switch dynamically
+    // adding initial PPM support later use macros to switch dynamically
     zetaRcin.initialize();
 }
 
-void Drone::Caliberate_Drone()
+void Drone::Caliberate_Drone(void)
 {
     mpu6050.Gyro_Caliberate();
     // add delay and led support
@@ -70,15 +78,14 @@ bool Drone::MidAirDrone()
     return false;
 }
 
-void Drone::updateRCIN()
+void Drone::updateRCIN(void)
 {
-    //updating the store
+    // updating the store
     zetaRcin.update();
-    Receiver_Values=zetaRcin.Receiver_Values_Store();
+    Receiver_Values = zetaRcin.Receiver_Values_Store();
 }
 
 std::vector<float> Drone::Return_Receiver_Store()
 {
     return Receiver_Values;
 }
-

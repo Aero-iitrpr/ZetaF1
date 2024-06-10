@@ -5,7 +5,7 @@
 #include <Zeta_RCIN/Zeta_RCIN_PPM.h>
 #include <vector>
 
-void ZetaRCIN_PPM::initialize()
+void ZetaRCIN_PPM::initialize(void)
 {
     // For this version we will using 3rd party module
     // Next version we will be implementing our own
@@ -16,7 +16,7 @@ void ZetaRCIN_PPM::initialize()
     Receiver_Values.resize(Number_Channels);
 }
 
-void ZetaRCIN_PPM::update()
+void ZetaRCIN_PPM::update(void)
 {
     // accepting only if the number of channels are greater than 0
     // most common channel numbers - 6, 10, 12
@@ -36,7 +36,7 @@ void ZetaRCIN_PPM::update()
 
 //this function return the vector of receiver values
 //PPM support only
-std::vector<float> ZetaRCIN_PPM::Receiver_Values_Store()
+std::vector<float> ZetaRCIN_PPM::Receiver_Values_Store(void)
 {
     return Receiver_Values;
 }

@@ -1,9 +1,14 @@
 #include <Arduino.h>
 #include <Drone.h>
 
+//declaring the main helper
+Drone drone;
+
 void setup()
 {
   // drone setup
+  
+  // drone.Initialize_Drone();
   drone.Initialize_Drone();
   if (drone.Caliberated)
   {

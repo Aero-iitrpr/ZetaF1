@@ -6,17 +6,17 @@
 #include <MPU6050/MPU6050.h>
 
 
-
-void MPU6050Sensor::initialize()
+void MPU6050Sensor::initialize(void)
 {
     // initiating the MPU6050 I2C communication
     Wire.beginTransmission(MPU6050_ADDRESS);
     Wire.write(0x6B);
     Wire.write(0x00);
     Wire.endTransmission();
+
 }
 
-bool MPU6050Sensor::check()
+bool MPU6050Sensor::check(void)
 {
     Wire.beginTransmission(MPU6050_ADDRESS);
     int Gyro_Error = Wire.endTransmission();
@@ -29,7 +29,7 @@ bool MPU6050Sensor::check()
     return true;
 }
 
-void MPU6050Sensor::MPU6050_Output()
+void MPU6050Sensor::MPU6050_Output(void)
 {
     Wire.beginTransmission(MPU6050_ADDRESS);
     Wire.write(0x1A);
