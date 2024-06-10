@@ -7,6 +7,7 @@
 #ifdef USE_PPM
 #include <Zeta_RCIN/Zeta_RCIN_PPM.h>
 #endif
+#include <Zeta_Low_Pass\Zeta_Low_Pass.h>
 
 class Drone
 {
@@ -14,6 +15,7 @@ public:
     void Initialize_Drone();
     void Calibrate_Drone();
     void GetMPU6050Data();
+    void ApplyLowPass();
     void Postprocessing();
     float getDroneAccelX();
     float getDroneAccelY();
@@ -31,7 +33,8 @@ public:
     float AccX, AccY, AccZ;
     float AngleRoll, AnglePitch;
     float RateRoll, RatePitch, RateYaw;
-    // baro variable
+    float AccX_Low_Pass, AccY_Low_Pass, AccZ_Low_Pass;
+    float RateRoll_Low_Pass, RatePitch_Low_Pass, RateYaw_Low_Pass;
     float Altitude;
     bool Calibrated = false;
     // rcin variables
@@ -42,6 +45,13 @@ private:
 #ifdef USE_PPM
     ZetaRCIN_PPM zetaRcin;
 #endif
+
+    ZetaLowPass accelXFilter;
+    ZetaLowPass accelYFilter;
+    ZetaLowPass accelZFilter;
+    ZetaLowPass gyroXFilter;
+    ZetaLowPass gyroYFilter;
+    ZetaLowPass gyroZFilter;
 };
 
 // extern Drone drone;

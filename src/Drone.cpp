@@ -13,8 +13,17 @@ void Drone::Initialize_Drone(void)
 {
     // this function does the initial setup required for the drone
     mpu6050.initialize();
-    // adding initial PPM support later use macros to switch dynamically
-    zetaRcin.initialize();
+
+    // Initialize low-pass filters with appropriate cutoff frequency and sample rate
+    float cutoffFrequency = 5.0; // change this to the actual cutoff frequency
+    float sampleRate = 100.0; // change this to the actual sample rate
+
+    accelXFilter = ZetaLowPass(cutoffFrequency, sampleRate);
+    accelYFilter = ZetaLowPass(cutoffFrequency, sampleRate);
+    accelZFilter = ZetaLowPass(cutoffFrequency, sampleRate);
+    gyroXFilter = ZetaLowPass(cutoffFrequency, sampleRate);
+    gyroYFilter = ZetaLowPass(cutoffFrequency, sampleRate);
+    gyroZFilter = ZetaLowPass(cutoffFrequency, sampleRate);
 }
 
 void Drone::Calibrate_Drone(void)
@@ -34,6 +43,15 @@ void Drone::GetMPU6050Data(void)
     RateRoll = mpu6050.getGyroX();
     RatePitch = mpu6050.getGyroY();
     RateYaw = mpu6050.getGyroZ();
+}
+void Drone::ApplyLowPass(void)
+{
+    AccX_Low_Pass = accelXFilter.process(AccX);
+    AccY_Low_Pass = accelYFilter.process(AccY);
+    AccZ_Low_Pass = accelZFilter.process(AccZ);
+    RateRoll_Low_Pass = gyroXFilter.process(RateRoll);
+    RatePitch_Low_Pass = gyroYFilter.process(RatePitch);
+    RateYaw_Low_Pass = gyroZFilter.process(RateYaw);
 }
 
 void Drone::Postprocessing()

@@ -35,3 +35,4 @@ private:
 
 
 #endif // MPU6050_H
+
