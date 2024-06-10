@@ -12,7 +12,7 @@ class Drone
 {
 public:
     void Initialize_Drone();
-    void Caliberate_Drone();
+    void Calibrate_Drone();
     void GetMPU6050Data();
     void Postprocessing();
     float getDroneAccelX();
@@ -33,7 +33,7 @@ public:
     float RateRoll, RatePitch, RateYaw;
     // baro variable
     float Altitude;
-    bool Caliberated = false;
+    bool Calibrated = false;
     // rcin variables
     std::vector<float> Receiver_Values;
 

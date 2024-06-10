@@ -10,9 +10,9 @@ void setup()
   
   // drone.Initialize_Drone();
   drone.Initialize_Drone();
-  if (drone.Caliberated)
+  if (drone.Calibrated)
   {
-    drone.Caliberate_Drone();
+    drone.Calibrate_Drone();
   }
 }
 

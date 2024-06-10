@@ -17,7 +17,7 @@ void Drone::Initialize_Drone(void)
     zetaRcin.initialize();
 }
 
-void Drone::Caliberate_Drone(void)
+void Drone::Calibrate_Drone(void)
 {
     mpu6050.Gyro_Caliberate();
     // add delay and led support
