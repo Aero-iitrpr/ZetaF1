@@ -6,12 +6,13 @@
 class MPU6050Sensor
 {
 public:
-    void initialize();
+    // MPU6050Sensor();
     bool check();
     void MPU6050_Output();
     void Gyro_Caliberate();
     void Accel_Caliberate();
     float getAccelX();
+    void initialize();
     float getAccelY();
     float getAccelZ();
     float getGyroX();
@@ -31,7 +32,7 @@ private:
     float Accel_Roll_Cal, Accel_Pitch_Cal,Accel_Yaw_Cal;
 };
 
-extern MPU6050Sensor mpu6050Sensor;
+
 
 #endif // MPU6050_H
 

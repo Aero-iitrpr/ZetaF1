@@ -1,13 +1,18 @@
 #include <Arduino.h>
 #include <Drone.h>
 
+//declaring the main helper
+Drone drone;
+
 void setup()
 {
   // drone setup
+  
+  // drone.Initialize_Drone();
   drone.Initialize_Drone();
-  if (drone.Caliberated)
+  if (drone.Calibrated)
   {
-    drone.Caliberate_Drone();
+    drone.Calibrate_Drone();
   }
 }
 
@@ -25,4 +30,9 @@ void loop()
   Serial.println(drone.getDroneGyroY());
   Serial.print("Gyro Z: ");
   Serial.println(drone.getDroneGyroZ());
+  //debug mode
+  for(auto channel:drone.Receiver_Values)
+  {
+    Serial.println(channel);
+  }
 }
