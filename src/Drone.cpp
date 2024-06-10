@@ -13,7 +13,9 @@ void Drone::Initialize_Drone(void)
 {
     // this function does the initial setup required for the drone
     mpu6050.initialize();
-
+    #ifdef USE_PPM
+    zetaRcin.initialize();
+    #endif
     // Initialize low-pass filters with appropriate cutoff frequency and sample rate
     float cutoffFrequency = 5.0; // change this to the actual cutoff frequency
     float sampleRate = 100.0; // change this to the actual sample rate
@@ -99,8 +101,10 @@ bool Drone::MidAirDrone()
 void Drone::updateRCIN(void)
 {
     // updating the store
+    #ifdef USE_PPM
     zetaRcin.update();
     Receiver_Values = zetaRcin.Receiver_Values_Store();
+    #endif
 }
 
 std::vector<float> Drone::Return_Receiver_Store()
