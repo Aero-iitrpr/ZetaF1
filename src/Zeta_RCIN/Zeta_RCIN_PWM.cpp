@@ -28,6 +28,9 @@ void Zeta_RCIN_PWM::ZetaRCIN_PWM()(void)
     attachInterrupt(digitalPinToInterrupt(pwmPin4), handleInterrupt4, CHANGE);
     attachInterrupt(digitalPinToInterrupt(pwmPin5), handleInterrupt5, CHANGE);
     attachInterrupt(digitalPinToInterrupt(pwmPin6), handleInterrupt6, CHANGE);
+    
+    //initializing input vector
+    Receiver_Values.resize(6);
 }
 
 void Zeta_RCIN_PWM::handleInterrupt1(void){
@@ -63,34 +66,14 @@ void Zeta_RCIN_PWM::common_for_calculation(int pin_val,int channel_val,int input
     last_channel[channel_val] = 0;
     input[input_val] = timer[0] - timer[timer_val];
   }
-}  
-
-void Zeta_RCIN_PWM::get_PWM_Value(int pin)
-{
-    if (pin == pwmPin1){
-        return input[0];
-    }
-    else if (pin == pwmPin2){
-        return input[1];
-    }
-    else if (pin == pwmPin3){
-        return input[2];
-    }
-    else if (pin == pwmPin4){
-        return input[3];
-    }
-    else if (pin == pwmPin5){
-        return input[4];
-    }
-    else if (pin == pwmPin6){
-        return input[5];
-    }
-    else
-    {
-        //line that indicates error in input
+    if (input[input_val]<0){
         return 0;
     }
-
+}  
+std::vector<int> Zeta_RCIN_PWM::get_PWM_Value()
+{
+    for (int i = 0; i < Receiver_Values.size();i ++){Receiver_Value.push_back(input[i]);}
+    return Receiver_Value;
 }
 
 
