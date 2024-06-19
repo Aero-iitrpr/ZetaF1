@@ -1,19 +1,19 @@
-//This is in experiment phase
-//Experiment Priority normal
+// This is in experiment phase
+// Experiment Priority normal
 
 #include <Wire.h>
 #include <Arduino.h>
 #include <MPU6050/MPU6050.h>
 
-
 void MPU6050Sensor::initialize(void)
 {
     // initiating the MPU6050 I2C communication
+    Wire.setClock(400000);
+    Wire.begin();
     Wire.beginTransmission(MPU6050_ADDRESS);
     Wire.write(0x6B);
     Wire.write(0x00);
     Wire.endTransmission();
-
 }
 
 bool MPU6050Sensor::check(void)
@@ -67,8 +67,8 @@ void MPU6050Sensor::MPU6050_Output(void)
 
 void MPU6050Sensor::Gyro_Caliberate(void)
 {
-    //add led support
-    //add error support
+    // add led support
+    // add error support
     Gyro_Caliberation_Num = 0;
     UGyro_Roll_Cal = 0;
     UGyro_Pitch_Cal = 0;
@@ -90,8 +90,8 @@ void MPU6050Sensor::Gyro_Caliberate(void)
 
 void MPU6050Sensor::Accel_Caliberate(void)
 {
-    //add led support
-    //add error support
+    // add led support
+    // add error support
     Accel_Caliberation_Num = 0;
     Accel_Roll_Cal = 0;
     Accel_Pitch_Cal = 0;
@@ -143,5 +143,3 @@ float MPU6050Sensor::getGyroZ(void)
     RateYaw -= UGyro_Yaw_Cal;
     return RateYaw;
 }
-
-
