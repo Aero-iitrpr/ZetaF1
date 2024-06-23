@@ -17,6 +17,27 @@ void MPU6050Sensor::initialize(void)
     if (status != 0) {
         Serial.print("Error: Unable to communicate with MPU6050, error code: ");
         Serial.println(status);
+        
+        switch (status) {
+            case 1:
+                Serial.println("Error: Data too long to fit in transmit buffer.");
+                break;
+            case 2:
+                Serial.println("Error: Received NACK on transmit of address.");
+                break;
+            case 3:
+                Serial.println("Error: Received NACK on transmit of data.");
+                break;
+            case 4:
+                Serial.println("Error: Other error.");
+                break;
+            case 5:
+                Serial.println("Error: Timeout.");
+                break;
+            default:
+                Serial.println("Error: Unknown error.");
+                break;
+        }
     } else {
         Serial.println("MPU6050 initialization successful.");
     }
