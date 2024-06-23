@@ -8,12 +8,18 @@
 void MPU6050Sensor::initialize(void)
 {
     // initiating the MPU6050 I2C communication
-    Wire.setClock(400000);
     Wire.begin();
+    Wire.setClock(400000);
     Wire.beginTransmission(MPU6050_ADDRESS);
     Wire.write(0x6B);
     Wire.write(0x00);
-    Wire.endTransmission();
+    uint8_t status = Wire.endTransmission();
+    if (status != 0) {
+        Serial.print("Error: Unable to communicate with MPU6050, error code: ");
+        Serial.println(status);
+    } else {
+        Serial.println("MPU6050 initialization successful.");
+    }
 }
 
 bool MPU6050Sensor::check(void)
