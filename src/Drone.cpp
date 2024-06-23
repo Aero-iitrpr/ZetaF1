@@ -52,7 +52,7 @@ void Drone::GetMPU6050Data(void)
     BufferLog.AddLog("AccZ", AccZ);
     BufferLog.AddLog("RateRoll", RateRoll);
     BufferLog.AddLog("RatePitch", RatePitch);
-    BufferLog.AddLog("RatePitch", RatePitch);
+    BufferLog.AddLog("RateYaw", RateYaw);
 }
 void Drone::ApplyLowPass(void)
 {
