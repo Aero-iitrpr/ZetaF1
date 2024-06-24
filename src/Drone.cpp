@@ -1,24 +1,25 @@
 #include "drone.h"
 #include <Arduino.h>
 #include <MPU6050/MPU6050.h>
+#include <Zeta_Buffer/Zeta_Buffer.h>
 #include <vector>
 
 #ifdef USE_PPM
 #include <Zeta_RCIN/Zeta_RCIN_PPM.h>
 #endif
 
-
-
 void Drone::Initialize_Drone(void)
 {
     // this function does the initial setup required for the drone
     mpu6050.initialize();
-    #ifdef USE_PPM
+    // Initialising the Circular Buffer Store
+    BufferLog.begin();
+#ifdef USE_PPM
     zetaRcin.initialize();
-    #endif
+#endif
     // Initialize low-pass filters with appropriate cutoff frequency and sample rate
     float cutoffFrequency = 5.0; // change this to the actual cutoff frequency
-    float sampleRate = 100.0; // change this to the actual sample rate
+    float sampleRate = 100.0;    // change this to the actual sample rate
 
     accelXFilter = ZetaLowPass(cutoffFrequency, sampleRate);
     accelYFilter = ZetaLowPass(cutoffFrequency, sampleRate);
@@ -45,6 +46,13 @@ void Drone::GetMPU6050Data(void)
     RateRoll = mpu6050.getGyroX();
     RatePitch = mpu6050.getGyroY();
     RateYaw = mpu6050.getGyroZ();
+    // we can add the buffer log here just to test
+    BufferLog.AddLog("AccX", AccX);
+    BufferLog.AddLog("AccY", AccY);
+    BufferLog.AddLog("AccZ", AccZ);
+    BufferLog.AddLog("RateRoll", RateRoll);
+    BufferLog.AddLog("RatePitch", RatePitch);
+    BufferLog.AddLog("RateYaw", RateYaw);
 }
 void Drone::ApplyLowPass(void)
 {
@@ -100,11 +108,11 @@ bool Drone::MidAirDrone()
 
 void Drone::updateRCIN(void)
 {
-    // updating the store
-    #ifdef USE_PPM
+// updating the store
+#ifdef USE_PPM
     zetaRcin.update();
     Receiver_Values = zetaRcin.Receiver_Values_Store();
-    #endif
+#endif
 }
 
 std::vector<float> Drone::Return_Receiver_Store()

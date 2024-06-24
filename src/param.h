@@ -10,4 +10,8 @@
 //use the below macro in case of pwm input
 //#define USE_PWM
 
+
+// Zeta Buffer Parameters
+#define CIRCULAR_BUFFER_SIZE 1024
+
 #endif 

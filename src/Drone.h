@@ -2,6 +2,7 @@
 #define DRONE_H
 #include <Arduino.h>
 #include <MPU6050/MPU6050.h>
+#include <Zeta_Buffer/Zeta_Buffer.h>
 #include <vector>
 
 #ifdef USE_PPM
@@ -42,6 +43,7 @@ public:
 
 private:
     MPU6050Sensor mpu6050;
+    ZetaBufferStore BufferLog;
 #ifdef USE_PPM
     ZetaRCIN_PPM zetaRcin;
 #endif
