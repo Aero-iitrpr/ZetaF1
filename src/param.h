@@ -9,12 +9,12 @@
 // #define USE_PPM
 //use the below macro in case of pwm input
 #define USE_PWM
-#define RC_PWM_PIN 1
-#define RC_PWM_PIN 2
-#define RC_PWM_PIN 3
-#define RC_PWM_PIN 4
-#define RC_PWM_PIN 5
-#define RC_PWM_PIN 6
+#define RC_PWM_PIN_1 1
+#define RC_PWM_PIN_2 2
+#define RC_PWM_PIN_3 3
+#define RC_PWM_PIN_4 4
+#define RC_PWM_PIN_5 5
+#define RC_PWM_PIN_6 6
 
 
 

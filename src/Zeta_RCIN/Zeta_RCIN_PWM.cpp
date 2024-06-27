@@ -6,12 +6,12 @@
 
 void Zeta_RCIN_PWM::ZetaRCIN_PWM()(void)
 {   // Set the pins
-    pwmPin1 = RC_PWM_PIN 1;
-    pwmPin2 = RC_PWM_PIN 2;
-    pwmPin3 = RC_PWM_PIN 3;
-    pwmPin4 = RC_PWM_PIN 4;
-    pwmPin5 = RC_PWM_PIN 5;
-    pwmPin6 = RC_PWM_PIN 6;
+    pwmPin1 = RC_PWM_PIN_1;
+    pwmPin2 = RC_PWM_PIN_2;
+    pwmPin3 = RC_PWM_PIN_3;
+    pwmPin4 = RC_PWM_PIN_4;
+    pwmPin5 = RC_PWM_PIN_5;
+    pwmPin6 = RC_PWM_PIN_6;
     
     // Set the pins as input
     pinMode(pwmPin2, INPUT);  
