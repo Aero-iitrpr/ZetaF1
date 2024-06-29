@@ -8,6 +8,10 @@
 #include <Zeta_RCIN/Zeta_RCIN_PPM.h>
 #endif
 
+#ifdef USE_PWM
+#include <Zeta_RCIN/Zeta_RCIN_PWM.h>
+#endif
+
 void Drone::Initialize_Drone(void)
 {
     // this function does the initial setup required for the drone
@@ -109,9 +113,15 @@ bool Drone::MidAirDrone()
 void Drone::updateRCIN(void)
 {
 // updating the store
+//using ppm signal
 #ifdef USE_PPM
     zetaRcin.update();
     Receiver_Values = zetaRcin.Receiver_Values_Store();
+#endif
+//using pwm signal 
+#ifdef USE_PWM
+    //No need to upadte the values, inturrupt services are updated by themself
+    Receiver_Values = zetaRcin.get_PWM_Value();
 #endif
 }
 

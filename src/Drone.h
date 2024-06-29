@@ -4,10 +4,15 @@
 #include <MPU6050/MPU6050.h>
 #include <Zeta_Buffer/Zeta_Buffer.h>
 #include <vector>
-
+//while using ppm
 #ifdef USE_PPM
 #include <Zeta_RCIN/Zeta_RCIN_PPM.h>
 #endif
+//while using pwm
+#ifdef USE_PWM
+#include <Zeta_RCIN/Zeta_RCIN_PWM.h>
+#endif
+
 #include <Zeta_Low_Pass\Zeta_Low_Pass.h>
 
 class Drone
@@ -46,6 +51,10 @@ private:
     ZetaBufferStore BufferLog;
 #ifdef USE_PPM
     ZetaRCIN_PPM zetaRcin;
+#endif
+
+#ifdef USE_PWM
+    ZetaRCIN_PWM zetaRcin; // here the object was declared hence initialization of hardware inturrupt was successfully done here
 #endif
 
     ZetaLowPass accelXFilter;
