@@ -4,13 +4,14 @@
 #include <Zeta_Buffer/Zeta_Buffer.h>
 #include <vector>
 
-#ifdef USE_PPM
-#include <Zeta_RCIN/Zeta_RCIN_PPM.h>
-#endif
 
-#ifdef USE_PWM
-#include <Zeta_RCIN/Zeta_RCIN_PWM.h>
-#endif
+// #ifdef USE_PPM
+// #include <Zeta_RCIN/Zeta_RCIN_PPM.h>
+// #endif
+
+// #ifdef USE_PWM
+// #include <Zeta_RCIN/Zeta_RCIN_PWM.h>
+// #endif
 
 void Drone::Initialize_Drone(void)
 {
@@ -18,19 +19,19 @@ void Drone::Initialize_Drone(void)
     mpu6050.initialize();
     // Initialising the Circular Buffer Store
     BufferLog.begin();
-#ifdef USE_PPM
-    zetaRcin.initialize();
-#endif
-    // Initialize low-pass filters with appropriate cutoff frequency and sample rate
-    float cutoffFrequency = 5.0; // change this to the actual cutoff frequency
-    float sampleRate = 100.0;    // change this to the actual sample rate
+// #ifdef USE_PPM
+//     zetaRcin.initialize();
+// #endif
+//     // Initialize low-pass filters with appropriate cutoff frequency and sample rate
+//     float cutoffFrequency = 5.0; // change this to the actual cutoff frequency
+//     float sampleRate = 100.0;    // change this to the actual sample rate
 
-    accelXFilter = ZetaLowPass(cutoffFrequency, sampleRate);
-    accelYFilter = ZetaLowPass(cutoffFrequency, sampleRate);
-    accelZFilter = ZetaLowPass(cutoffFrequency, sampleRate);
-    gyroXFilter = ZetaLowPass(cutoffFrequency, sampleRate);
-    gyroYFilter = ZetaLowPass(cutoffFrequency, sampleRate);
-    gyroZFilter = ZetaLowPass(cutoffFrequency, sampleRate);
+//     accelXFilter = ZetaLowPass(zeta_low_pass_accelX_cutoff, zeta_low_pass_accelX_rate);
+//     accelYFilter = ZetaLowPass(zeta_low_pass_accelY_cutoff, zeta_low_pass_accelY_rate);
+//     accelZFilter = ZetaLowPass(zeta_low_pass_accelZ_cutoff, zeta_low_pass_accelZ_rate);
+//     gyroXFilter = ZetaLowPass(zeta_low_pass_gyroX_cutoff, zeta_low_pass_gyroX_rate);
+//     gyroYFilter = ZetaLowPass(zeta_low_pass_gyroY_cutoff, zeta_low_pass_gyroY_rate);
+//     gyroZFilter = ZetaLowPass(zeta_low_pass_gyroZ_cutoff, zeta_low_pass_gyroZ_rate);
 }
 
 void Drone::Calibrate_Drone(void)
@@ -51,12 +52,21 @@ void Drone::GetMPU6050Data(void)
     RatePitch = mpu6050.getGyroY();
     RateYaw = mpu6050.getGyroZ();
     // we can add the buffer log here just to test
-    BufferLog.AddLog("AccX", AccX);
-    BufferLog.AddLog("AccY", AccY);
-    BufferLog.AddLog("AccZ", AccZ);
-    BufferLog.AddLog("RateRoll", RateRoll);
-    BufferLog.AddLog("RatePitch", RatePitch);
-    BufferLog.AddLog("RateYaw", RateYaw);
+    // BufferLog.AddLog("AccX", AccX);
+    // BufferLog.AddLog("AccY", AccY);
+    ApplyLowPass();
+    String fullLog = "AccX:" + String(AccX);
+    String fullLog1 = "AccXFilter:" + String(AccX_Low_Pass);
+    Serial.println(fullLog);
+    Serial.println(fullLog1);
+    // BufferLog.AddLog("AccZ", AccZ);
+    // BufferLog.AddLog("RateRoll", RateRoll);
+    // BufferLog.AddLog("RatePitch", RatePitch);
+    // BufferLog.AddLog("RateYaw", RateYaw);
+    // Serial.print(AccX);
+    // Serial.print(" ");
+    // Serial.print(AccY);
+    // Serial.print("\n");
 }
 void Drone::ApplyLowPass(void)
 {
@@ -114,15 +124,15 @@ void Drone::updateRCIN(void)
 {
 // updating the store
 //using ppm signal
-#ifdef USE_PPM
-    zetaRcin.update();
-    Receiver_Values = zetaRcin.Receiver_Values_Store();
-#endif
-//using pwm signal 
-#ifdef USE_PWM
-    //No need to upadte the values, inturrupt services are updated by themself
-    Receiver_Values = zetaRcin.get_PWM_Value();
-#endif
+// #ifdef USE_PPM
+//     zetaRcin.update();
+//     Receiver_Values = zetaRcin.Receiver_Values_Store();
+// #endif
+// //using pwm signal 
+// #ifdef USE_PWM
+//     //No need to upadte the values, inturrupt services are updated by themself
+//     Receiver_Values = zetaRcin.get_PWM_Value();
+// #endif
 }
 
 std::vector<float> Drone::Return_Receiver_Store()

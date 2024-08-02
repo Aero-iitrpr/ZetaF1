@@ -4,7 +4,7 @@
 class ZetaLowPass {
 public:
     
-    ZetaLowPass(float cutoffFrequency = 1.0, float sampleRate = 1.0);
+    ZetaLowPass(float cutoffFrequency = 5.0, float sampleRate = 10.0);
 
     // Method to set the cutoff frequency
     void setCutoffFrequency(float cutoffFrequency);
@@ -26,4 +26,3 @@ private:
 };
 
 #endif // ZETA_LOW_PASS_H
-

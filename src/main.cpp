@@ -32,8 +32,8 @@ void loop()
   // Serial.println(drone.getDroneGyroZ());
 
   // //debug mode
-  for (auto channel : drone.Receiver_Values)
-  {
-    Serial.println(channel);
-  }
+  // for (auto channel : drone.Receiver_Values)
+  // {
+  //   Serial.println(channel);
+  // }
 }
