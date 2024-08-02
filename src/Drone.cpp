@@ -17,6 +17,7 @@ void Drone::Initialize_Drone(void)
 {
     // this function does the initial setup required for the drone
     mpu6050.initialize();
+    bmp180.initialize();
     // Initialising the Circular Buffer Store
     BufferLog.begin();
 // #ifdef USE_PPM
@@ -138,4 +139,17 @@ void Drone::updateRCIN(void)
 std::vector<float> Drone::Return_Receiver_Store()
 {
     return Receiver_Values;
+}
+
+float Drone::getDroneAltitude()
+{
+  float pressure = bmp180.getPressure();
+  // float temperature = bmp180.getTemperature();
+  return 44330.0 * (1.0 - pow(pressure / bmp180.groundPressure, 0.1903));
+  // return pressure;
+}
+
+float Drone::getAmbientTemperature()
+{
+  return bmp180.getTemperature();
 }

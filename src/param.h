@@ -4,6 +4,15 @@
 // MPU6050 Parameters
 #define MPU6050_ADDRESS 0x68
 
+// BMP180 Parameters
+#define BMP180_ADDRESS 0x77
+
+#define BMP180_REG_CONTROL 0xF4
+#define BMP180_REG_RESULT 0xF6
+
+#define BMP180_CMD_TEMPERATURE 0x2E
+#define BMP180_CMD_PRESSURE 0x34
+
 //RC PPM Parameters
 #define RC_PPM_PIN 1
 // #define USE_PPM

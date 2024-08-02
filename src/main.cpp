@@ -36,4 +36,9 @@ void loop()
   // {
   //   Serial.println(channel);
   // }
+  Serial.print("Ambient Temperature: ");
+  Serial.println(drone.getAmbientTemperature());
+  Serial.print("Altitude: ");
+  Serial.println(drone.getDroneAltitude());
+  delay(1000);
 }
