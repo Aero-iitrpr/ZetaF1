@@ -26,8 +26,11 @@ void LEDController::setBlinkMode(BlinkMode mode) {
 }
 
 void LEDController::setLEDRate(int rate) {
-  this->rate = rate;
   timePeriod = 1000 / rate;
+}
+
+void LEDController::setLEDTimePeriod(int timePeriod) {
+  this->timePeriod = timePeriod;
 }
 
 void LEDController::setLEDState(LEDState state) {

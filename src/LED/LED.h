@@ -20,13 +20,13 @@ public:
   void setBlinkMode(BlinkMode mode);
   void setLEDRate(int rate);
   void setLEDState(LEDState state);
+  void setLEDTimePeriod(int timePeriod);
   void update();
 
 private:
-  int bluePin, redPin;
   LEDState state;
   BlinkMode mode;
-  int rate, timePeriod;
+  int timePeriod;
   elapsedMillis timer;
 };
 
