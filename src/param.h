@@ -4,11 +4,12 @@
 // MPU6050 Parameters
 #define MPU6050_ADDRESS 0x68
 
-//RC PPM Parameters
-// #define RC_PPM_PIN 1
+// RC PPM Parameters
+// use the below macros to choose from PWM and PPM Inputs
 // #define USE_PPM
-//use the below macro in case of pwm input
 #define USE_PWM
+
+#define RC_PPM_PIN 1
 #define RC_PWM_PIN_1 1
 #define RC_PWM_PIN_2 2
 #define RC_PWM_PIN_3 3
@@ -20,5 +21,9 @@
 
 // Zeta Buffer Parameters
 #define CIRCULAR_BUFFER_SIZE 1024
+
+// LED Parameters
+#define LED_BPIN 13
+#define LED_RPIN 12
 
 #endif 

@@ -14,11 +14,12 @@
 #endif
 
 #include <Zeta_Low_Pass\Zeta_Low_Pass.h>
+#include <LED/LED.h>
 
 class Drone
 {
 public:
-    void Initialize_Drone();
+    void Initialize_Drone(LEDController led);
     void Calibrate_Drone();
     void GetMPU6050Data();
     void ApplyLowPass();
@@ -31,7 +32,7 @@ public:
     float getDroneGyroZ();
     bool MidAirDrone();
     void updateRCIN();
-    std::vector<float> Return_Receiver_Store();
+    std::vector<int> Return_Receiver_Store();
 
     // global variables
     bool MidAirDroneBool;
@@ -44,9 +45,10 @@ public:
     float Altitude;
     bool Calibrated = false;
     // rcin variables
-    std::vector<float> Receiver_Values;
+    std::vector<int> Receiver_Values;
 
 private:
+    LEDController led;
     MPU6050Sensor mpu6050;
     ZetaBufferStore BufferLog;
 #ifdef USE_PPM

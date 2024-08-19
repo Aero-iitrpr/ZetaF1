@@ -3,12 +3,13 @@
 
 // declaring the main helper
 Drone drone;
+LEDController led;
 
 void setup()
 {
   // drone setup
   Serial.begin(9600);
-  drone.Initialize_Drone();
+  drone.Initialize_Drone(led);
   if (drone.Calibrated)
   {
     drone.Calibrate_Drone();
@@ -36,4 +37,5 @@ void loop()
   {
     Serial.println(channel);
   }
+  led.update();
 }

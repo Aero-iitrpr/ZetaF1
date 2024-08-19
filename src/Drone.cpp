@@ -12,7 +12,9 @@
 #include <Zeta_RCIN/Zeta_RCIN_PWM.h>
 #endif
 
-void Drone::Initialize_Drone(void)
+#include <LED/LED.h>
+
+void Drone::Initialize_Drone(LEDController led)
 {
     // this function does the initial setup required for the drone
     mpu6050.initialize();
@@ -125,7 +127,7 @@ void Drone::updateRCIN(void)
 #endif
 }
 
-std::vector<float> Drone::Return_Receiver_Store()
+std::vector<int> Drone::Return_Receiver_Store()
 {
     return Receiver_Values;
 }
